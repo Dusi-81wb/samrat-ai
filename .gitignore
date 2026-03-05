@@ -1,0 +1,25 @@
+# Virtual environment
+venv/
+
+# Vector database
+chroma_db/
+
+# Personal memory — don't upload this!
+memory.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+*.swp
+
+# Large model files
+*.bin
+*.gguf
+*.tgz
+
+# Environment variables — never upload!
+.env
