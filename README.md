@@ -77,5 +77,56 @@ Edit the Modelfile with your own name and personality
 then run:
 ollama create samrat-ai -f Modelfile
 
+
+## Docker Setup (Recommended)
+
+### Prerequisites
+- Docker and Docker Compose installed
+- Ollama running on host machine with models pulled:
+
+ollama pull samrat-ai
+ollama pull nomic-embed-text
+
+### Run with Docker Compose
+
+1. Clone the repository
+git clone https://github.com/Dusi-81wb/samrat-ai.git
+cd samrat-ai
+
+2. Create .env file
+OWNER_PASSWORD=yourchosenpassword
+API_KEY=yourapikey
+OLLAMA_HOST=http://host.docker.internal:11434
+
+3. Build and run
+docker-compose up --build
+
+4. Access
+- Streamlit UI: http://localhost:8501
+- FastAPI: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+
+### Stop
+docker-compose down
+
+## API Usage
+
+### Chat endpoint
+curl -X POST http://localhost:8000/chat
+  -H "Content-Type: application/json"
+  -H "X-API-Key: yourapikey"
+  -d '{"message": "Who are you?", "session_id": "test"}'
+
+### Upload PDF
+curl -X POST http://localhost:8000/upload-pdf/mysession
+  -H "X-API-Key: yourapikey"
+  -F "file=@document.pdf"
+
+### Ask about PDF
+curl -X POST http://localhost:8000/rag-chat
+  -H "Content-Type: application/json"
+  -H "X-API-Key: yourapikey"
+  -d '{"message": "Summarize this", "session_id": "mysession"}'
+
 ## Author
 Built by Samrat — Data Science and AI Engineering Student
