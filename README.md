@@ -23,15 +23,19 @@ Runs 100% on-device with zero cloud dependency.
 
 ## Architecture
 User Query
+    
     ↓
     
 PDF chunks stored in FAISS vector DB
+    
     ↓
     
 Semantic search finds relevant chunks
+    
     ↓
     
 Qwen2.5 3B generates answer locally
+    
     ↓
     
 Persistent memory saves important facts
