@@ -1,0 +1,28 @@
+# Base image
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+RUN pip install --no-cache-dir \
+    streamlit \
+    ollama \
+    pypdf \
+    faiss-cpu \
+    langchain \
+    langchain-ollama \
+    langchain-community \
+    langchain-text-splitters \
+    python-dotenv \
+    numpy
+
+# Copy project files
+COPY app.py .
+COPY memory.py .
+
+# Expose Streamlit port
+EXPOSE 8501
+
+# Run Streamlit
+CMD ["streamlit", "run", "app.py", "--server.address", "0.0.0.0"]

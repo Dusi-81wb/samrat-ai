@@ -65,5 +65,17 @@ ollama create samrat-ai -f Modelfile
 ### 6. Run
 streamlit run app.py
 
+
+######IMPORTANT#####
+
+## Setup Your Own Password
+Create a .env file in the project root:
+OWNER_PASSWORD=yourchosenpassword
+
+## Setup Your Own AI Model
+Edit the Modelfile with your own name and personality
+then run:
+ollama create samrat-ai -f Modelfile
+
 ## Author
 Built by Samrat — Data Science and AI Engineering Student

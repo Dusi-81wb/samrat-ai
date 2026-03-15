@@ -1,0 +1,37 @@
+
+
+services:
+
+  # FastAPI Service
+  samrat-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: samrat-api
+    ports:
+      - "8000:8000"
+    environment:
+      - API_KEY=${API_KEY}
+      - OWNER_PASSWORD=${OWNER_PASSWORD}
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    volumes:
+      - ./memory.json:/app/memory.json
+
+  # Streamlit Service
+  samrat-streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: samrat-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - OWNER_PASSWORD=${OWNER_PASSWORD}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    volumes:
+      - ./memory.json:/app/memory.json

@@ -1,0 +1,34 @@
+# Base image — Python 3.11 (more stable than 3.14 for Docker)
+FROM python:3.11-slim
+
+# Set working directory inside container
+WORKDIR /app
+
+# Copy requirements first (better caching)
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    "ollama>=0.4.0" \
+    pypdf \
+    faiss-cpu \
+    langchain \
+    langchain-ollama \
+    langchain-community \
+    langchain-text-splitters \
+    python-multipart \
+    slowapi \
+    python-dotenv \
+    numpy
+
+# Copy project files
+COPY api.py .
+COPY memory.py .
+
+# Expose port
+EXPOSE 8000
+
+# Run the API
+CMD ["python", "api.py"]
